@@ -6,18 +6,14 @@ import 'package:projects/mobile/home/app_cubit/cubit.dart';
 import 'package:projects/mobile/home/app_cubit/state.dart';
 import 'package:projects/mobile/home/custom_clipper_for_nar_bar.dart';
 import 'package:projects/mobile/library/library_screen.dart';
+import 'package:projects/mobile/tasks/cubit/cubit.dart';
 import 'package:projects/shared/network/local/cash_helper.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => HomeCubit()..getAllTasks(token: CashHelper.getString(key: "token"), context: context),
-        ),
-        // BlocProvider(create: (context)=>ProfileCubit())
-      ],
+    return BlocProvider<HomeCubit>(
+      create: (context) => HomeCubit()..getAllTasks(token: CashHelper.getString(key: "token"), context: context),
       child: BlocConsumer<HomeCubit, HomeStates>(
         listener: (context, state) {
           if (state is LogOutSuccessState) {
@@ -297,7 +293,8 @@ appBar({required BuildContext context}) => AppBar(
                   text: "Hey",
                   style: Theme.of(context).textTheme.caption!.copyWith(
                       color: HomeCubit.get(context).indexOfPage == 4 ||
-                              HomeCubit.get(context).indexOfPage == 18
+                              HomeCubit.get(context).indexOfPage == 18||
+                              HomeCubit.get(context).indexOfPage == 3
                           ? Colors.white
                           : Colors.black),
                   context: context,
@@ -306,7 +303,8 @@ appBar({required BuildContext context}) => AppBar(
                   text: "Focustic",
                   style: Theme.of(context).textTheme.caption!.copyWith(
                       color: HomeCubit.get(context).indexOfPage == 4 ||
-                              HomeCubit.get(context).indexOfPage == 18
+                              HomeCubit.get(context).indexOfPage == 18 ||
+                              HomeCubit.get(context).indexOfPage == 3
                           ? Colors.white
                           : Colors.black),
                   context: context,
@@ -345,7 +343,8 @@ appBar({required BuildContext context}) => AppBar(
                   },
                   child: Image(
                     color: HomeCubit.get(context).indexOfPage == 4 ||
-                            HomeCubit.get(context).indexOfPage == 18
+                            HomeCubit.get(context).indexOfPage == 18||
+                            HomeCubit.get(context).indexOfPage == 3
                         ? Color(0xfff98e48)
                         : Theme.of(context).iconTheme.color,
                     image: AssetImage("assets/icons/notification.png"),

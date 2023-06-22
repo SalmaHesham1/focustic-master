@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:projects/mobile/home/home_screen.dart';
 import 'package:projects/mobile/onboarding/onboarding_screen.dart';
 import 'package:projects/mobile/register/login/login_screen.dart';
 import 'package:projects/mobile/register/register_cubit/state.dart';
@@ -103,11 +104,19 @@ class RegisterCubit extends Cubit<RegisterStates> {
       CashHelper.putData(key: "id", value: loginModel!.data.user.id.toString());
       print(CashHelper.getString(key: "token"));
       print(CashHelper.getString(key: "id"));
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => OnBoardingScreen()),
-        (route) => false,
-      );
+      CashHelper.putData(
+          key: "hardware", value: false)
+          .then((value) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  HomeScreen()),
+              (route) => false,
+        );
+      }).catchError((error) {
+        print(error.toString());
+      });
     }).catchError((error) {
       print(error.toString());
       emit(LoginFailState(error: error.toString()));

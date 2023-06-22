@@ -43,6 +43,7 @@ class Feature1Screen extends StatelessWidget {
   }) =>
       Container(
         width: double.infinity,
+        height: 700,
         decoration: BoxDecoration(
             image: DecorationImage(
           alignment: Alignment.center,
@@ -51,183 +52,139 @@ class Feature1Screen extends StatelessWidget {
             "assets/images/backgroundmobile8.jpeg",
           ),
         )),
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: /*CashHelper.getBool(key: "isWeb")? 400:*/ 25,
-                vertical: 40,
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: /*CashHelper.getBool(key: "isWeb")? 400:*/ 25,
+            vertical: 40,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              SizedBox(
+                height: 50,
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          IconButton(
-                              onPressed: () {
-                                // Navigator.pop(context);
-                              },
-                              icon: Icon(
-                                Icons.arrow_back_ios,
-                                color: Theme.of(context).primaryColor,
-                              )),
-                        ],
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Image.asset("assets/icons/start.png"),
-                          Column(
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text("START",
-                                                style: TextStyle(
-                                                  fontSize: 40,
-                                                  color: Colors.deepOrange,
-                                                )),
-                                            Text(
-                                              "ORGANIZING YOUR TASKS",
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleLarge!
-                                                  .copyWith(
-                                                      overflow: TextOverflow
-                                                          .ellipsis),
-                                              maxLines: 3,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      // SizedBox(height: 30,),
-
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Text(
-                                          "Lorem ipsum dolor sit amet , cnsectetur",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color: Colors.lightBlue[200],
-                                          )),
-
-                                      Text(
-                                          "adipiscing elit,sed do eiusmod tempor",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color: Colors.lightBlue[200],
-                                          )),
-
-                                      Text(
-                                          "incididunt ut labore et dolore mangna aliqua",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color: Colors.lightBlue[200],
-                                          )),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
+                  Container(
+                    color: Theme.of(context).primaryColor,
+                    height: 10,
+                    width: 10,
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'What this feature provide ?',
-                            style: Theme.of(context).textTheme.headline5,
+                  SizedBox(width: 5,),
+                  Expanded(
+                    child: Text(
+                      'Focustic empowers you to optimize your workflow, ensuring that every minute counts.',
+                      style:
+                          Theme.of(context).textTheme.bodyText1!.copyWith(
+                            overflow: TextOverflow.ellipsis
                           ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    color: Theme.of(context).primaryColor,
-                                    height: 10,
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    'Easily adding tasks to an organized table',
-                                    style:
-                                        Theme.of(context).textTheme.bodyText1,
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Row(
-                                children: [
-                                  Container(
-                                    color: Theme.of(context).primaryColor,
-                                    height: 10,
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    'Easily adding tasks to an organized table',
-                                    style:
-                                        Theme.of(context).textTheme.bodyText1,
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Row(
-                                children: [
-                                  Container(
-                                    color: Theme.of(context).primaryColor,
-                                    height: 10,
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    'Easily adding tasks to an organized table',
-                                    style:
-                                        Theme.of(context).textTheme.bodyText1,
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 40,
-                      ),
-                      // joinButton(context: context),
-                    ],
+                      maxLines: 4,
+                    ),
                   ),
                 ],
               ),
-            ),
-          ],
+              SizedBox(
+                height: 8,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    color: Theme.of(context).primaryColor,
+                    height: 10,
+                    width: 10,
+                  ),
+                  SizedBox(width: 5,),
+                  Expanded(
+                    child: Text(
+                      "With Focustic, you'll have the power to make each day more productive than the last.",
+                      style:
+                          Theme.of(context).textTheme.bodyText1!.copyWith(
+                              overflow: TextOverflow.ellipsis
+                          ),
+                        maxLines: 4,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    color: Theme.of(context).primaryColor,
+                    height: 10,
+                    width: 10,
+                  ),
+                  SizedBox(width: 5,),
+                  Expanded(
+                    child: Text(
+                      "Focustic provides a diverse range of suitable exercises to alleviate discomfort and promote optimal health.",
+                      style:
+                          Theme.of(context).textTheme.bodyText1!.copyWith(
+                              overflow: TextOverflow.ellipsis
+                          ),
+                      maxLines: 4,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    color: Theme.of(context).primaryColor,
+                    height: 10,
+                    width: 10,
+                  ),
+                  SizedBox(width: 5,),
+                   Expanded(
+                     child: Text(
+                      'Engage in friendly competition through our community ranking services, where you can track your progress, celebrate milestones, and strive for greater productivity. Together, we can accomplish more.',
+                      style:
+                          Theme.of(context).textTheme.bodyText1!.copyWith(
+                              overflow: TextOverflow.ellipsis
+                          ),
+                       maxLines: 4,
+                  ),
+                   ),
+                ],
+              ),
+              SizedBox(
+                height: 50,
+              ),
+            ],
+          ),
         ),
       );
 }
+
+// ## Manage and Track Your Time:
+//
+// Efficiently manage your time with our intuitive time management tools. Stay organized,  and track your progress effortlessly. Focustic empowers you to optimize your workflow, ensuring that every minute counts.
+//
+// ## Daily Reports for Your Work:
+//
+// Gain valuable insights into your computer usage habits with our comprehensive daily reports. Understand how you spend your time, identify patterns, and make informed decisions to enhance your productivity. With Focustic, you'll have the power to make each day more productive than the last.
+//
+// ## Tailored Exercises for Health:
+//
+// Combat the strains of prolonged computer use with our carefully curated exercises. Whether you're experiencing neck and shoulder pain, eyestrain, or overuse injuries in your arms and hands, Focustic provides a diverse range of suitable exercises to alleviate discomfort and promote optimal health.
+//
+// ## Motivation through Community Ranking Services:
+//
+// Stay motivated and inspired by joining our thriving community of like-minded individuals. Engage in friendly competition through our community ranking services, where you can track your progress, celebrate milestones, and strive for greater productivity. Together, we can accomplish more.
+//
+// With Focustic, you can boost your productivity, prioritize your health, and find a harmonious balance between work and well-being. Take control of your digital journey and unlock your full potential with Focustic - your partner in success and vitality.
+//
+// ---
+//
 
 Widget buildWebScreen({
   required BuildContext context,

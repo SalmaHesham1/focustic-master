@@ -29,7 +29,8 @@ class HomeBody extends StatelessWidget {
                 children: [
                   CashHelper.getBool(key: "hardware")
                       ? SizedBox()
-                      : Column(
+                      :
+                  Column(
                           children: [
                             CircleAvatar(
                               backgroundImage: AssetImage(

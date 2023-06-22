@@ -272,7 +272,7 @@ class MyTask extends StatelessWidget {
                                   padding: const EdgeInsets.all(8.0),
                                   child: DropdownButtonHideUnderline(
                                     child: DropdownButton(
-                                      hint: Text("Daily",
+                                      hint: Text("Monthly",
                                           style: TextStyle(
                                               color: Colors.black, fontSize: 15)),
                                       value: TasksCubit.get(context: context).selectedItemEdit,

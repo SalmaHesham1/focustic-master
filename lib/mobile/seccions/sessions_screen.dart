@@ -120,7 +120,7 @@ sessionsBody({
                             Text(
                               SessionsCubit.get(context: context).index == 2
                                   ? "Session"
-                                  : "Seccions",
+                                  : "Sessions",
                               style: Theme.of(context).textTheme.headline5,
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,

@@ -88,7 +88,7 @@ class AboutScreen extends StatelessWidget {
                     ),
                   ),
                   Feature1Screen(),
-                  Feature2Screen(),
+                  // Feature2Screen(),
                 ],
             ),
           ),
@@ -640,28 +640,3 @@ Widget textInHomeScreen({
       ],
     );
 
-//
-// Welcome to Focustic - Your Ultimate Productivity and Health Companion!
-//
-// At Focustic, we understand the demands of a digital lifestyle and the impact it can have on your well-being. That's why we've developed a powerful app that combines advanced time management features with personalized healthcare exercises, providing a holistic solution to help you thrive in today's computer-centric world.
-//
-// ## Manage and Track Your Time:
-//
-// Efficiently manage your time with our intuitive time management tools. Stay organized,  and track your progress effortlessly. Focustic empowers you to optimize your workflow, ensuring that every minute counts.
-//
-// ## Daily Reports for Your Work:
-//
-// Gain valuable insights into your computer usage habits with our comprehensive daily reports. Understand how you spend your time, identify patterns, and make informed decisions to enhance your productivity. With Focustic, you'll have the power to make each day more productive than the last.
-//
-// ## Tailored Exercises for Health:
-//
-// Combat the strains of prolonged computer use with our carefully curated exercises. Whether you're experiencing neck and shoulder pain, eyestrain, or overuse injuries in your arms and hands, Focustic provides a diverse range of suitable exercises to alleviate discomfort and promote optimal health.
-//
-// ## Motivation through Community Ranking Services:
-//
-// Stay motivated and inspired by joining our thriving community of like-minded individuals. Engage in friendly competition through our community ranking services, where you can track your progress, celebrate milestones, and strive for greater productivity. Together, we can accomplish more.
-//
-// With Focustic, you can boost your productivity, prioritize your health, and find a harmonious balance between work and well-being. Take control of your digital journey and unlock your full potential with Focustic - your partner in success and vitality.
-//
-// ---
-//

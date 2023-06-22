@@ -135,7 +135,7 @@ class TasksCubit extends Cubit<TasksStates>{
       data: {
         "name": name,
         "note": note,
-        "state": state=="Done"?"done":"active",
+        "state": state=="Done"?"completed":"active",
         "duration": duration=="30 min"?"30": (duration=="45 min"?"45":"90"),
         // "reminder": reminder,
         // "reminder_date": "2023-04-01 00:00",
@@ -158,6 +158,7 @@ class TasksCubit extends Cubit<TasksStates>{
     required String id,
 })
   async {
+    print(id);
     emit(TasksDeleteTaskLoadingState());
     return await dio!
         .delete(

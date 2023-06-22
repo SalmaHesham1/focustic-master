@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:projects/mobile/home/home_screen.dart';
 import 'package:projects/mobile/register/register_screen.dart';
+import 'package:projects/shared/network/local/cash_helper.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -26,7 +28,7 @@ class SplashScreen extends StatelessWidget {
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => RegisterScreen()),
+                          builder: (context) => CashHelper.getString(key: "token")==null?RegisterScreen():HomeScreen()),
                           (route) => false,
                     );
                   },
