@@ -194,7 +194,7 @@ buildLibraryScreen({
                                         overflow: TextOverflow.ellipsis,
                                         fontWeight: FontWeight.w500,
                                       ),
-                                  maxLines: 4,
+                                  maxLines: 3,
                                 ),
                               ),
                             ],

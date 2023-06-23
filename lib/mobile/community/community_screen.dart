@@ -9,15 +9,7 @@ class CommunityScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<CommunityScreenCubit>(
-      create: (context) => CommunityScreenCubit(),
-      child: BlocConsumer<CommunityScreenCubit, CommunityScreenStates>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          return buildCommunityScreen(context: context);
-        },
-      ),
-    );
+    return buildCommunityScreen(context: context);
   }
 }
 

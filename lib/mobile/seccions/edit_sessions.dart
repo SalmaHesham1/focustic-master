@@ -29,7 +29,7 @@ class EditSessionsScreen extends StatelessWidget {
                           hintText: "session1",
                           prefixIcon: Icons.sunny,
                           validator: "Enter the name of session",
-                          controller: SessionsCubit.get(context: context)
+                          controller: HomeCubit.get(context)
                               .sessionEditName,
                           keyboardType: TextInputType.name,
                           context: context)
@@ -130,9 +130,7 @@ class EditSessionsScreen extends StatelessWidget {
                                                           const EdgeInsets.all(
                                                               8.0),
                                                       child: Text(
-                                                        SessionsCubit.get(
-                                                                context:
-                                                                    context)
+                                                        HomeCubit.get( context)
                                                             .time![0],
                                                         maxLines: 2,
                                                         overflow: TextOverflow
@@ -160,13 +158,9 @@ class EditSessionsScreen extends StatelessWidget {
                                                           i++)
                                                         PopupMenuItem(
                                                           onTap: () {
-                                                            SessionsCubit.get(
-                                                                    context:
-                                                                        context)
+                                                            HomeCubit.get( context)
                                                                 .changeTime(
-                                                                    to: SessionsCubit.get(
-                                                                            context:
-                                                                                context)
+                                                                    to: HomeCubit.get( context)
                                                                         .time![1],
                                                                     from: time_splot[i]);
                                                           },
@@ -217,9 +211,7 @@ class EditSessionsScreen extends StatelessWidget {
                                                           const EdgeInsets.all(
                                                               8.0),
                                                       child: Text(
-                                                        SessionsCubit.get(
-                                                                context:
-                                                                    context)
+                                                        HomeCubit.get( context)
                                                             .time![1],
                                                         maxLines: 2,
                                                         overflow: TextOverflow
@@ -247,13 +239,9 @@ class EditSessionsScreen extends StatelessWidget {
                                                           i++)
                                                         PopupMenuItem(
                                                           onTap: () {
-                                                            SessionsCubit.get(
-                                                                    context:
-                                                                        context)
+                                                            HomeCubit.get( context)
                                                                 .changeTime(
-                                                                    from: SessionsCubit.get(
-                                                                            context:
-                                                                                context)
+                                                                    from: HomeCubit.get( context)
                                                                         .time![0],
                                                                     to: time_splot[i]);
                                                           },

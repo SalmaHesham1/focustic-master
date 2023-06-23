@@ -8,3 +8,4 @@ const ALLSESSIONS = "http://focustic.spider-te8.com/api/v1/my-sessions";
 const ALLTASKS = "http://focustic.spider-te8.com/api/v1/tasks";
 const USER = "http://focustic.spider-te8.com/api/v1/user";
 const REPORT = "http://focustic.spider-te8.com/api/v1/report-machine";
+const COMMUNITY = "http://focustic.spider-te8.com/api/v1/communities";

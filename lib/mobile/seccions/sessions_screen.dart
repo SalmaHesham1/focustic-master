@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:projects/mobile/home/app_cubit/cubit.dart';
+import 'package:projects/mobile/home/app_cubit/state.dart';
 import 'package:projects/mobile/register/register_screen.dart';
 import 'package:projects/mobile/seccions/cubit/cubit.dart';
 import 'package:projects/mobile/seccions/cubit/state.dart';
@@ -12,54 +13,36 @@ class SessionsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<SessionsCubit>(
-      create: (context) => SessionsCubit()
-        ..getAllSession(
-            token: CashHelper.getString(key: "token"), context: context),
-      child: BlocConsumer<SessionsCubit, SessionsStates>(
-        listener: (context, state) {
-          if(HomeCubit.get(context).tasksModel!.data.length==0){
-            print("--------");
-            Fluttertoast.showToast(
-                msg: "you should have a tasks",
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.BOTTOM,
-                timeInSecForIosWeb: 1,
-                backgroundColor: Colors.red,
-                textColor: Colors.white,
-                fontSize: 16.0);
-          }
-          else{
+    return BlocConsumer<HomeCubit, HomeStates>(
+      listener: (context, state) {
+        if(HomeCubit.get(context).tasksModel!.data.length==0){
+          print("--------");
+          Fluttertoast.showToast(
+              msg: "you should have a tasks",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }
+        else{
 
-            print(state);
-            if (state is SessionsAddSessionsSuccessState ||
-                state is SessionsGetAllSessionsSuccessState) {
-              Fluttertoast.showToast(
-                  msg: "Success",
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.BOTTOM,
-                  timeInSecForIosWeb: 1,
-                  backgroundColor: Colors.green,
-                  textColor: Colors.white,
-                  fontSize: 16.0);
-            } else if (state is SessionsAddSessionsFailState ||
-                state is SessionsGetAllSessionsFailState) {
-              Fluttertoast.showToast(
-                  msg: "Fail",
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.BOTTOM,
-                  timeInSecForIosWeb: 1,
-                  backgroundColor: Colors.red,
-                  textColor: Colors.white,
-                  fontSize: 16.0);
-            }
-          }
-        },
-        builder: (context, state) {
-          if(HomeCubit.get(context).tasksModel!.data.length==0){
-            print("--------");
+          print(state);
+          if (state is SessionsAddSessionsSuccessState ||
+              state is SessionsGetAllSessionsSuccessState) {
             Fluttertoast.showToast(
-                msg: "you should have a tasks",
+                msg: "Success",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.green,
+                textColor: Colors.white,
+                fontSize: 16.0);
+          } else if (state is SessionsAddSessionsFailState ||
+              state is SessionsGetAllSessionsFailState) {
+            Fluttertoast.showToast(
+                msg: "Fail",
                 toastLength: Toast.LENGTH_SHORT,
                 gravity: ToastGravity.BOTTOM,
                 timeInSecForIosWeb: 1,
@@ -67,18 +50,31 @@ class SessionsScreen extends StatelessWidget {
                 textColor: Colors.white,
                 fontSize: 16.0);
           }
-          return state is SessionsGetAllSessionsLoadingState
-              ? Center(
-                  child: CircularProgressIndicator(
-                    color: Color(0xfff98e48),
-                  ),
-                )
-              : sessionsBody(
-                  context: context,
-                  state: state,
-                );
-        },
-      ),
+        }
+      },
+      builder: (context, state) {
+        if(HomeCubit.get(context).tasksModel!.data.length==0){
+          print("--------");
+          Fluttertoast.showToast(
+              msg: "you should have a tasks",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }
+        return state is SessionsGetAllSessionsLoadingState
+            ? Center(
+                child: CircularProgressIndicator(
+                  color: Color(0xfff98e48),
+                ),
+              )
+            : sessionsBody(
+                context: context,
+                state: state,
+              );
+      },
     );
   }
 }
@@ -88,7 +84,7 @@ sessionsBody({
   required var state,
 }) =>
     Form(
-      key: SessionsCubit.get(context: context).addFormKey,
+      key: HomeCubit.get( context).addFormKey,
       child: Container(
         height: double.infinity,
         width: double.infinity,
@@ -108,7 +104,7 @@ sessionsBody({
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SessionsCubit.get(context: context).index == 2
+                            HomeCubit.get(context).index == 2
                                 ? Text(
                                     "Add new",
                                     style:
@@ -118,7 +114,7 @@ sessionsBody({
                                   )
                                 : SizedBox(),
                             Text(
-                              SessionsCubit.get(context: context).index == 2
+                              HomeCubit.get(context).index == 2
                                   ? "Session"
                                   : "Sessions",
                               style: Theme.of(context).textTheme.headline5,
@@ -137,8 +133,8 @@ sessionsBody({
                 SizedBox(
                   height: 20,
                 ),
-                SessionsCubit.get(context: context)
-                    .screens[SessionsCubit.get(context: context).index],
+                HomeCubit.get(context)
+                    .screens[HomeCubit.get(context).index],
                 state is SessionsAddSessionsLoadingState || state is SessionsEditSessionsLoadingState
                     ? Center(
                         child: CircularProgressIndicator(
@@ -161,7 +157,7 @@ sessionsBody({
                                       radius: 14,
                                       context: context,
                                       child: Text(
-                                        SessionsCubit.get(context: context)
+                                        HomeCubit.get(context)
                                                     .index ==
                                                 0
                                             ? "Add Session"
@@ -171,58 +167,53 @@ sessionsBody({
                                             .titleLarge,
                                       ),
                                       onPressed: () {
-                                        if (SessionsCubit.get(context: context)
+                                        if (HomeCubit.get(context)
                                                 .index ==
                                             0) {
-                                          SessionsCubit.get(context: context)
+                                          HomeCubit.get(context)
                                               .changeSessionsScreen(
                                                   numOfScreen: 2);
                                           // SessionsCubit.get(context: context).getAllSession(
                                           //       token: CashHelper.getString(key: "token"), context: context);
-                                        } else if (SessionsCubit.get(
-                                                    context: context)
+                                        } else if (HomeCubit.get(context)
                                                 .index ==
                                             1 &&
-                                            SessionsCubit.get(context: context)
+                                            HomeCubit.get(context)
                                                 .addFormKey
                                                 .currentState!
                                                 .validate()&& HomeCubit.get(context).tasksModel!.data.length!=0) {
-                                          SessionsCubit.get(context: context)
+                                          HomeCubit.get(context)
                                               .changeSessionsScreen(
                                                   numOfScreen: 0);
-                                          SessionsCubit.get(context: context)
+                                          HomeCubit.get(context)
                                               .getAllSession(
                                                   token: CashHelper.getString(
                                                       key: "token"),
                                                   context: context);
-                                          SessionsCubit.get(context: context)
+                                          HomeCubit.get(context)
                                               .editSession(
-                                            id: SessionsCubit.get(context: context).idOfEditSession,
-                                              name: SessionsCubit.get(
-                                                  context: context)
+                                            id: HomeCubit.get(context).idOfEditSession,
+                                              name: HomeCubit.get(context)
                                                   .sessionEditName
                                                   .text,
                                               token: CashHelper.getString(
                                                   key: "token"),
                                               context: context);
 
-                                        } else if (SessionsCubit.get(
-                                                        context: context)
+                                        } else if (HomeCubit.get(context)
                                                     .index ==
                                                 2 &&
-                                            SessionsCubit.get(context: context)
+                                            HomeCubit.get(context)
                                                 .addFormKey
                                                 .currentState!
                                                 .validate()
                                         && HomeCubit.get(context).tasksModel!.data.length!=0) {
-                                          print(SessionsCubit.get(
-                                                  context: context)
+                                          print(HomeCubit.get(context)
                                               .sessionName
                                               .text);
-                                          SessionsCubit.get(context: context)
+                                          HomeCubit.get(context)
                                               .addSession(
-                                                  name: SessionsCubit.get(
-                                                          context: context)
+                                                  name: HomeCubit.get(context)
                                                       .sessionName
                                                       .text,
                                                   token: CashHelper.getString(

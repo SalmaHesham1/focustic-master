@@ -1,40 +1,42 @@
-abstract class SessionsStates {}
+// abstract class SessionsStates {}
 
-class SessionsInitState extends SessionsStates {}
+// class SessionsInitState extends HomeStates {}
 
-class SessionsChangeScreenState extends SessionsStates {}
+import 'package:projects/mobile/home/app_cubit/state.dart';
 
-class SessionsChangeFromTimeState extends SessionsStates {}
+class SessionsChangeScreenState extends HomeStates {}
 
-class SessionsChangeToTimeState extends SessionsStates {}
+class SessionsChangeFromTimeState extends HomeStates {}
 
-class SessionsGetAllSessionsLoadingState extends SessionsStates {}
+class SessionsChangeToTimeState extends HomeStates {}
 
-class SessionsGetAllSessionsSuccessState extends SessionsStates {}
+class SessionsGetAllSessionsLoadingState extends HomeStates {}
 
-class SessionsGetAllSessionsFailState extends SessionsStates {
+class SessionsGetAllSessionsSuccessState extends HomeStates {}
+
+class SessionsGetAllSessionsFailState extends HomeStates {
   String error;
 
   SessionsGetAllSessionsFailState({required this.error});
 }
 
-class SessionsAddSessionsLoadingState extends SessionsStates {}
+class SessionsAddSessionsLoadingState extends HomeStates {}
 
-class SessionsAddSessionsSuccessState extends SessionsStates {}
+class SessionsAddSessionsSuccessState extends HomeStates {}
 
-class SessionsAddSessionsFailState extends SessionsStates {
+class SessionsAddSessionsFailState extends HomeStates {
   String error;
 
   SessionsAddSessionsFailState({required this.error});
 }
-class SessionsEditSessionsLoadingState extends SessionsStates {}
+class SessionsEditSessionsLoadingState extends HomeStates {}
 
-class SessionsEditSessionsSuccessState extends SessionsStates {}
+class SessionsEditSessionsSuccessState extends HomeStates {}
 
-class SessionsEditSessionsFailState extends SessionsStates {
+class SessionsEditSessionsFailState extends HomeStates {
   String error;
 
   SessionsEditSessionsFailState({required this.error});
 }
 
-class ChangeIdOfEditSessionState extends SessionsStates{}
+class ChangeIdOfEditSessionState extends HomeStates{}

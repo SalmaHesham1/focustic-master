@@ -13,7 +13,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<HomeCubit>(
-      create: (context) => HomeCubit()..getAllTasks(token: CashHelper.getString(key: "token"), context: context),
+      create: (context) => HomeCubit()..getAllTasks(token: CashHelper.getString(key: "token"), context: context) ..getAllSession(
+          token: CashHelper.getString(key: "token"), context: context),
       child: BlocConsumer<HomeCubit, HomeStates>(
         listener: (context, state) {
           if (state is LogOutSuccessState) {
@@ -394,8 +395,8 @@ Widget drawer({
                     ),
                     onTap: () {
                       scaffoldKey.currentState.closeEndDrawer();
+                      for(int i=1;i<=10;i++)HomeCubit.get(context).getCommunityInfo(token: CashHelper.getString(key: "token"), context: context,index: i,);
 
-                      HomeCubit.get(context).changeBody(index: 16);
                     },
                   ),
                   ListTile(

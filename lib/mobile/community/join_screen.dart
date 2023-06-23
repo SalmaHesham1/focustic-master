@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:projects/mobile/community/cubit/cubit.dart';
 import 'package:projects/mobile/home/app_cubit/cubit.dart';
 import 'package:projects/mobile/register/register_screen.dart';
 import 'package:projects/shared/component/component.dart';
+import 'package:projects/mobile/home/app_cubit/state.dart';
+import 'package:projects/shared/network/local/cash_helper.dart';
 
 class JoinCommunityScreen extends StatelessWidget {
 
@@ -25,32 +29,32 @@ class JoinCommunityScreen extends StatelessWidget {
                       Text(
                         "These are the most",
                         style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                              color: Color(0xff0671B9),
-                              fontWeight: FontWeight.w500,
-                            ),
+                          color: Color(0xff0671B9),
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                       Text(
                         "recommended communities",
                         style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                              color: Color(0xff0671B9),
-                              fontWeight: FontWeight.w500,
-                            ),
+                          color: Color(0xff0671B9),
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                       Text(
                         "for you as a graphic designer",
                         style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                              color: Color(0xff0671B9),
-                              fontWeight: FontWeight.w500,
-                            ),
+                          color: Color(0xff0671B9),
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                       Row(
                         children: [
                           Expanded(
                               child: Divider(
-                            height: 2,
-                            color: Color(0xffd85105),
-                            thickness: 2,
-                          )),
+                                height: 2,
+                                color: Color(0xffd85105),
+                                thickness: 2,
+                              )),
                           Expanded(child: SizedBox()),
                         ],
                       ),
@@ -76,59 +80,64 @@ class JoinCommunityScreen extends StatelessWidget {
             child: ListView.separated(
                 physics: BouncingScrollPhysics(),
                 itemBuilder: (context, index) => mainContainer(
-                      radius: 20,
-                      child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: InkWell(
-                                onTap: () {
-                                  HomeCubit.get(context).changeBody(index: 8);
-                                },
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Text(
-                                      "Community ${(index + 1).toString()}",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge,
-                                    ),
-                                    Text(
-                                      "1.4k members",
-                                      style:
-                                      Theme.of(context).textTheme.caption,
-                                    ),
-                                  ],
+                  radius: 20,
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: InkWell(
+                            onTap: () {
+                              HomeCubit.get(context).getUserCommunityInfo(token: CashHelper.getString(key: "token"), context: context,);
+
+                              HomeCubit.get(context).changeBody(index: 8);
+                            },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment:
+                              MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(
+                                  HomeCubit.get(context).communityInfo[index].keys.toString(),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge,
                                 ),
+                                Text(
+                                  "${HomeCubit.get(context).communityInfo[index].values.toString()} members",
+                                  style:
+                                  Theme.of(context).textTheme.caption,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        mainTextButton(
+                            context: context,
+                            radius: 20,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              child: Row(
+                                children: [
+                                  Text("Join "),
+                                  Icon(
+                                    HomeCubit.get( context).isJoinClicked[index]?Icons.done:Icons.add,
+                                  )
+                                ],
                               ),
                             ),
-                            mainTextButton(
-                                context: context,
-                                radius: 20,
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 10),
-                                  child: Row(
-                                    children: [
-                                      Text("Join "),
-                                      Icon(
-                                        Icons.add,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                onPressed: () {
-                                  HomeCubit.get(context).changeBody(index: 8);
-                                })
-                          ],
-                        ),
-                      ),
-                      color: Color(0xffd85105),
-                      colorOfTheBorder: Color(0xffd85105),
+                            onPressed: () {
+                              HomeCubit.get( context).changeJoinButton(index:index);
+                              HomeCubit.get(context).joinCommunityInfo(token: CashHelper.getString(key: "token"), context: context, index: (index+1).toString());
+                              HomeCubit.get(context).getUserCommunityInfo(token: CashHelper.getString(key: "token"), context: context,);
+                              // HomeCubit.get(context).changeBody(index: 8);
+                            })
+                      ],
                     ),
+                  ),
+                  color: Color(0xffd85105),
+                  colorOfTheBorder: Color(0xffd85105),
+                ),
                 separatorBuilder: (context, index) => SizedBox(
                   height: 10,
                 ),
@@ -148,7 +157,7 @@ class JoinCommunityScreen extends StatelessWidget {
 // "assets/images/background.png",
 // ),),
 // SizedBox(width: 5,),
-// Column(
+// Column({}
 // crossAxisAlignment: CrossAxisAlignment.start,
 // children: [
 // title(text: "Hey",

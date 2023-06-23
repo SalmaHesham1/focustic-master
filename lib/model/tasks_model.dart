@@ -3,10 +3,10 @@ class TasksModel {
     required this.data,
   });
 
-  late final List<Data> data;
+  late final List<DataTask> data;
 
   TasksModel.fromJson(Map<String, dynamic> json) {
-    data = List.from(json['data']).map((e) => Data.fromJson(e)).toList();
+    data = List.from(json['data']).map((e) => DataTask.fromJson(e)).toList();
   }
 
   Map<String, dynamic> toJson() {
@@ -16,8 +16,8 @@ class TasksModel {
   }
 }
 
-class Data {
-  Data({
+class DataTask {
+  DataTask({
     required this.id,
     required this.attributes,
     required this.relationships,
@@ -26,7 +26,7 @@ class Data {
   late final Attributes attributes;
   late final List<dynamic> relationships;
 
-  Data.fromJson(Map<String, dynamic> json) {
+  DataTask.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     attributes = Attributes.fromJson(json['attributes']);
     relationships = List.castFrom<dynamic, dynamic>(json['relationships']);

@@ -14,8 +14,8 @@ class HomeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => HomeCubit(),
+    return BlocProvider(  
+      create: (context) => HomeCubit()..getAllTasks(token: CashHelper.getString(key: "token"), context: context),
       child: BlocConsumer<HomeCubit, HomeStates>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -147,9 +147,41 @@ class HomeBody extends StatelessWidget {
                                   Icons.keyboard_arrow_up,
                                   color: Colors.black,
                                 ),
-                                itemBuilder: (context) {
-                                  return [
-                                    PopupMenuItem(
+                                itemBuilder: (context) =>HomeCubit.get(context).monthlyList.length==0?[PopupMenuItem(
+                                  child: Container(
+                                      height: 40,
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                          BorderRadius.circular(15),
+                                          border: Border.all(
+                                            color: Color.fromRGBO(
+                                                135, 199, 255, 1),
+                                            width: 1,
+                                          )),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              flex: 2,
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    "Empty",
+                                                    style: TextStyle(
+                                                      color: Colors.black,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      )),
+                                )]:[
+
+                                  for (int i=0;i<HomeCubit.get(context).monthlyList.length;i++)PopupMenuItem(
                                       child: Container(
                                           height: 40,
                                           width: double.infinity,
@@ -215,76 +247,8 @@ class HomeBody extends StatelessWidget {
                                               ],
                                             ),
                                           )),
-                                    ),
-                                    PopupMenuItem(
-                                      child: Container(
-                                          height: 40,
-                                          width: double.infinity,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                              border: Border.all(
-                                                color: Color.fromRGBO(
-                                                    135, 199, 255, 1),
-                                                width: 1,
-                                              )),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Row(
-                                              children: [
-                                                Expanded(
-                                                  flex: 2,
-                                                  child: Row(
-                                                    children: [
-                                                      Text(
-                                                        "Task " + '1',
-                                                        style: TextStyle(
-                                                          color: Colors.black,
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(
-                                                          bottom: 10,
-                                                          left: 5,
-                                                        ),
-                                                        child: GestureDetector(
-                                                          onTap: () {
-                                                            // Navigator.push(context,
-                                                            //     MaterialPageRoute(builder: (context) => EditScreen()));
-                                                          },
-                                                          child: Image(
-                                                            height: 30,
-                                                            width: 30,
-                                                            fit: BoxFit.contain,
-                                                            color: Theme.of(
-                                                                    context)
-                                                                .primaryColor,
-                                                            image: AssetImage(
-                                                              "assets/icons/edit.png",
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child: Text(
-                                                    DateFormat("hh:mm a")
-                                                        .format(DateTime.now()),
-                                                    style: TextStyle(
-                                                      color: Colors.black,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          )),
-                                    ),
-                                  ];
-                                })
+                                    )
+                                ])
                           ],
                         ),
                       )),

@@ -20,9 +20,9 @@ class TasksCubit extends Cubit<TasksStates>{
   String tdataTask = DateFormat("hh:mm a").format(DateTime.now());
   List itemsTask = [];
   TasksModel? tasksModel;
-  Data? dailyTasksModel;
-  Data? weeklyTasksModel;
-  Data? monthlyTasksModel;
+  DataTask? dailyTasksModel;
+  DataTask? weeklyTasksModel;
+  DataTask? monthlyTasksModel;
   List dailyList = [];
   List weeklyList = [];
   List monthlyList = [];
@@ -79,17 +79,17 @@ class TasksCubit extends Cubit<TasksStates>{
       for (int i = 0; i < tasksModel!.data.length; i++) {
         print(i);
         if (tasksModel!.data[i].attributes.kind == "daily") {
-          dailyTasksModel = Data.fromJson(value.data!["data"][i]);
+          dailyTasksModel = DataTask.fromJson(value.data!["data"][i]);
           dailyList.add(dailyTasksModel);
           print(dailyList[0].id);
           print("daily");
         } else if (value.data["data"][i]["attributes"]["kind"] == "weekly") {
-          weeklyTasksModel = Data.fromJson(value.data!["data"][i]);
+          weeklyTasksModel = DataTask.fromJson(value.data!["data"][i]);
           weeklyList.add(weeklyTasksModel);
           print(weeklyList[0].id);
           print("weekly");
         } else if (value.data["data"][i]["attributes"]["kind"] == "monthly") {
-          monthlyTasksModel = Data.fromJson(value.data!["data"][i]);
+          monthlyTasksModel = DataTask.fromJson(value.data!["data"][i]);
           monthlyList.add(monthlyTasksModel);
           print(monthlyList[0].id);
           print("monthly");

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projects/mobile/home/app_cubit/cubit.dart';
 import 'package:projects/mobile/seccions/cubit/cubit.dart';
 import 'package:projects/shared/component/component.dart';
 
@@ -34,8 +35,8 @@ class ListOfSessionsScreen extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: Text(
-                                        SessionsCubit
-                                            .get(context: context)
+                                        HomeCubit
+                                            .get(context)
                                             .sessionsModel!
                                             .data[index].attributes.name,
                                         style: TextStyle(
@@ -52,13 +53,13 @@ class ListOfSessionsScreen extends StatelessWidget {
                                       ),
                                       child: GestureDetector(
                                         onTap: () {
-                                          SessionsCubit.get(context: context).changeIdOfSession(index: SessionsCubit
-                                              .get(context: context)
+                                          HomeCubit.get( context).changeIdOfSession(index: HomeCubit
+                                              .get(context)
                                               .sessionsModel!
                                               .data[index].id);
-                                          print(SessionsCubit
-                                              .get(context: context).idOfEditSession);
-                                          SessionsCubit.get(context: context)
+                                          print(HomeCubit
+                                              .get(context).idOfEditSession);
+                                          HomeCubit.get(context)
                                               .changeSessionsScreen(numOfScreen: 1);
                                         },
                                         child: Image(
@@ -80,15 +81,15 @@ class ListOfSessionsScreen extends StatelessWidget {
                                 children: [Expanded(
                                   flex: 1,
                                   child: Text(
-                                    SessionsCubit
-                                        .get(context: context)
+                                    HomeCubit
+                                        .get(context)
                                         .sessionsModel!
                                         .data[index].attributes.state,
                                     textAlign: TextAlign.right,
                                     style: TextStyle(
                                       fontWeight: FontWeight.w300,
-                                      color: SessionsCubit
-                                          .get(context: context)
+                                      color: HomeCubit
+                                          .get(context)
                                           .sessionsModel!
                                           .data[index].attributes.state ==
                                           "active"
@@ -115,8 +116,8 @@ class ListOfSessionsScreen extends StatelessWidget {
                         color: Colors.black12,
                       ),
                     ),
-                itemCount: SessionsCubit
-                    .get(context: context)
+                itemCount: HomeCubit
+                    .get(context)
                     .sessionsModel!
                     .data
                     .length)));

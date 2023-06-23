@@ -9,6 +9,21 @@ class CommunityScreenCubit extends Cubit<CommunityScreenStates> {
   static CommunityScreenCubit get({required BuildContext context}) =>
       BlocProvider.of(context);
 
+  List<bool> isJoinClicked=[
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,];
+  changeJoinButton({required int index}){
+    isJoinClicked[index] =!isJoinClicked[index];
+    emit(ChangeJoinButtonState());
+  }
   // List<String> tapBody = [
   //   "Articles",
   //   "Activity",

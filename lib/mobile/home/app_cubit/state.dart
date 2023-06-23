@@ -39,6 +39,25 @@ class LogOutFailState extends HomeStates {
 
   LogOutFailState({required this.error});
 }
+class GetCommunityInfoLoadingState extends HomeStates {}
+
+class GetCommunityInfoSuccessState extends HomeStates {}
+
+class GetCommunityInfoFailState extends HomeStates {
+  String error;
+
+  GetCommunityInfoFailState({required this.error});
+}
+
+class GetUserCommunityInfoLoadingState extends HomeStates {}
+
+class GetUSerCommunityInfoSuccessState extends HomeStates {}
+
+class GetUserCommunityInfoFailState extends HomeStates {
+  String error;
+
+  GetUserCommunityInfoFailState({required this.error});
+}
 
 class AllTasksLoadingState extends HomeStates {}
 
@@ -59,3 +78,5 @@ class HomeProfileFailState extends HomeStates {
 
   HomeProfileFailState({required this.error});
 }
+
+class ChangeJoinButtonState extends HomeStates {}
