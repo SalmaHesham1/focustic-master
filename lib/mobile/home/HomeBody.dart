@@ -8,6 +8,7 @@ import 'package:projects/mobile/register/register_screen.dart';
 import 'package:projects/mobile/tasks/Addtask.dart';
 import 'package:projects/shared/component/component.dart';
 import 'package:projects/shared/network/local/cash_helper.dart';
+import 'package:projects/generated/assets.dart';
 
 class HomeBody extends StatelessWidget {
   const HomeBody({Key? key}) : super(key: key);
@@ -276,147 +277,113 @@ class HomeBody extends StatelessWidget {
                                   Icons.keyboard_arrow_up,
                                   color: Colors.black,
                                 ),
-                                itemBuilder: (context) {
-                                  return [
-                                    PopupMenuItem(
-                                      child: Container(
-                                          height: 40,
-                                          width: double.infinity,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                              border: Border.all(
-                                                color: Color.fromRGBO(
-                                                    135, 199, 255, 1),
-                                                width: 1,
-                                              )),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Row(
-                                              children: [
-                                                Expanded(
-                                                  flex: 2,
-                                                  child: Row(
-                                                    children: [
-                                                      Text(
-                                                        "Task " + '1',
-                                                        style: TextStyle(
-                                                          color: Colors.black,
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(
-                                                          bottom: 10,
-                                                          left: 5,
-                                                        ),
-                                                        child: GestureDetector(
-                                                          onTap: () {
-                                                            // Navigator.push(context,
-                                                            //     MaterialPageRoute(builder: (context) => EditScreen()));
-                                                          },
-                                                          child: Image(
-                                                            height: 30,
-                                                            width: 30,
-                                                            fit: BoxFit.contain,
-                                                            color: Theme.of(
-                                                                    context)
-                                                                .primaryColor,
-                                                            image: AssetImage(
-                                                              "assets/icons/edit.png",
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child: Text(
-                                                    DateFormat("hh:mm a")
-                                                        .format(DateTime.now()),
+                                itemBuilder: (context) =>HomeCubit.get(context).monthlyList.length==0?[PopupMenuItem(
+                                  child: Container(
+                                      height: 40,
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                          BorderRadius.circular(15),
+                                          border: Border.all(
+                                            color: Color.fromRGBO(
+                                                135, 199, 255, 1),
+                                            width: 1,
+                                          )),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              flex: 2,
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    "Empty",
                                                     style: TextStyle(
                                                       color: Colors.black,
                                                     ),
                                                   ),
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
-                                          )),
-                                    ),
-                                    PopupMenuItem(
-                                      child: Container(
-                                          height: 40,
-                                          width: double.infinity,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                              border: Border.all(
-                                                color: Color.fromRGBO(
-                                                    135, 199, 255, 1),
-                                                width: 1,
-                                              )),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Row(
-                                              children: [
-                                                Expanded(
-                                                  flex: 2,
-                                                  child: Row(
-                                                    children: [
-                                                      Text(
-                                                        "Task " + '1',
-                                                        style: TextStyle(
-                                                          color: Colors.black,
-                                                        ),
+                                          ],
+                                        ),
+                                      )),
+                                )]:[
+
+                                  for (int i=0;i<HomeCubit.get(context).monthlyList.length;i++)PopupMenuItem(
+                                    child: Container(
+                                        height: 40,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                            BorderRadius.circular(15),
+                                            border: Border.all(
+                                              color: Color.fromRGBO(
+                                                  135, 199, 255, 1),
+                                              width: 1,
+                                            )),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            children: [
+                                              Expanded(
+                                                flex: 2,
+                                                child: Row(
+                                                  children: [
+                                                    Text(
+                                                      "Task " + '1',
+                                                      style: TextStyle(
+                                                        color: Colors.black,
                                                       ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(
-                                                          bottom: 10,
-                                                          left: 5,
-                                                        ),
-                                                        child: GestureDetector(
-                                                          onTap: () {
-                                                            // Navigator.push(context,
-                                                            //     MaterialPageRoute(builder: (context) => EditScreen()));
-                                                          },
-                                                          child: Image(
-                                                            height: 30,
-                                                            width: 30,
-                                                            fit: BoxFit.contain,
-                                                            color: Theme.of(
-                                                                    context)
-                                                                .primaryColor,
-                                                            image: AssetImage(
-                                                              "assets/icons/edit.png",
-                                                            ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                      const EdgeInsets
+                                                          .only(
+                                                        bottom: 10,
+                                                        left: 5,
+                                                      ),
+                                                      child: GestureDetector(
+                                                        onTap: () {
+                                                          // Navigator.push(context,
+                                                          //     MaterialPageRoute(builder: (context) => EditScreen()));
+                                                        },
+                                                        child: Image(
+                                                          height: 30,
+                                                          width: 30,
+                                                          fit: BoxFit.contain,
+                                                          color: Theme.of(
+                                                              context)
+                                                              .primaryColor,
+                                                          image: AssetImage(
+                                                            "assets/icons/edit.png",
                                                           ),
                                                         ),
                                                       ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child: Text(
-                                                    DateFormat("hh:mm a")
-                                                        .format(DateTime.now()),
-                                                    style: TextStyle(
-                                                      color: Colors.black,
                                                     ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: Text(
+                                                  DateFormat("hh:mm a")
+                                                      .format(DateTime.now()),
+                                                  style: TextStyle(
+                                                    color: Colors.black,
                                                   ),
                                                 ),
-                                              ],
-                                            ),
-                                          )),
-                                    ),
-                                  ];
-                                })
+                                              ),
+                                            ],
+                                          ),
+                                        )),
+                                  )
+                                ])
                           ],
                         ),
                       )),
+
+                  SizedBox(height:10),
                   ListView.separated(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
@@ -438,7 +405,7 @@ class HomeBody extends StatelessWidget {
                                         image: DecorationImage(
                                           fit: BoxFit.cover,
                                           image: AssetImage(
-                                            "assets/images/community-artifici.png",
+                                            Assets.imagesHardware,
                                           ),
                                         ),
                                       ),
@@ -451,8 +418,7 @@ class HomeBody extends StatelessWidget {
                                           top: 18,
                                         ),
                                         child: Text(
-                                            "lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem",
-                                            maxLines: 4,
+                                            "Our hardware protect you from nech pain",maxLines: 4,
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .caption!
@@ -469,7 +435,7 @@ class HomeBody extends StatelessWidget {
                       separatorBuilder: (context, index) => SizedBox(
                             height: 10,
                           ),
-                      itemCount: 10),
+                      itemCount: 1),
                 ],
               ),
             ),

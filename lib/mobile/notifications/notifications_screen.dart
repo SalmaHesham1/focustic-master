@@ -72,7 +72,9 @@ class NotificationsScreen extends StatelessWidget {
                                   ),
                                   Expanded(
                                     child: Text(
-                                      "Focastic has just Post an article in a community you are in .",
+                                      "rotation_x: 100.00  "
+                                    "rotation_y: 171.00  "
+                                      "rotation_z: 102.00  ",
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 2,
                                       style: Theme.of(context)
@@ -89,7 +91,7 @@ class NotificationsScreen extends StatelessWidget {
                     separatorBuilder: (Context, index) => SizedBox(
                           height: 10,
                         ),
-                    itemCount: 10)
+                    itemCount: 1)
               ],
             ),
           );

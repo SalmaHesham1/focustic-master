@@ -147,7 +147,7 @@ Widget editName({
   //person name
   personName() => Container(
         child: Text(
-          "FOCUSTIC",
+          "Mrs. Lilian O'Conner I",
           style: TextStyle(
             fontSize: 35,
             overflow: TextOverflow.ellipsis,
@@ -289,7 +289,7 @@ Widget editAndAgeAndSendAMessage({
           //work an age
           Container(
             child: Text(
-              "DEVELOPED - 20 YEARS OLD",
+              "major15@example.net - 8 YEARS OLD",
               style: TextStyle(
                   fontSize: 22,
                   color: Theme.of(context).primaryColor,
@@ -367,10 +367,7 @@ Widget buildProfileScreen({
                       padding: EdgeInsets.all(15),
                       width: double.infinity,
                       child: Text(
-                        "lorem lorem lorem lorem"
-                        "lorem lorem lorem lorem"
-                        "lorem lorem lorem lorem"
-                        "lorem lorem lorem lorem",
+                        "Illum omnis laboriosam consectetur fuga cumque earum in.",
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,

@@ -57,7 +57,7 @@ class Posts extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            HomeCubit.get(context).userCommunity!.data!.,
+                                            "Mrs. Lilian O'Conner I",
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .button!
@@ -116,7 +116,7 @@ class Posts extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "Rank in Community ",
+                                  "Rank in Community 6",
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 2,
                                   style: Theme.of(context)
