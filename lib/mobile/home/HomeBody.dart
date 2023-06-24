@@ -418,7 +418,7 @@ class HomeBody extends StatelessWidget {
                                           top: 18,
                                         ),
                                         child: Text(
-                                            "Our hardware protect you from nech pain",maxLines: 4,
+                                            "Our hardware protect you from neck pain",maxLines: 4,
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .caption!

@@ -89,8 +89,8 @@ class JoinCommunityScreen extends StatelessWidget {
                           child: InkWell(
                             onTap: () {
                               HomeCubit.get(context).getUserCommunityInfo(token: CashHelper.getString(key: "token"), context: context,);
-
                               HomeCubit.get(context).changeBody(index: 8);
+
                             },
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,

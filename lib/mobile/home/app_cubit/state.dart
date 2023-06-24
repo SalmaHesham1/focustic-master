@@ -49,6 +49,16 @@ class GetCommunityInfoFailState extends HomeStates {
   GetCommunityInfoFailState({required this.error});
 }
 
+class GetHardwareDataLoadingState extends HomeStates {}
+
+class GetHardwareDataSuccessState extends HomeStates {}
+
+class GetHardwareDataFailState extends HomeStates {
+  String error;
+
+  GetHardwareDataFailState({required this.error});
+}
+
 class GetUserCommunityInfoLoadingState extends HomeStates {}
 
 class GetUSerCommunityInfoSuccessState extends HomeStates {}
@@ -80,3 +90,5 @@ class HomeProfileFailState extends HomeStates {
 }
 
 class ChangeJoinButtonState extends HomeStates {}
+
+class ChangeCommunityProfileState extends HomeStates {}

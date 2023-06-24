@@ -174,4 +174,6 @@ class ProfileCubit extends Cubit<ProfileStates> {
       emit(ShowReportFailState(error: error.toString()));
     });
   }
+
+
 }

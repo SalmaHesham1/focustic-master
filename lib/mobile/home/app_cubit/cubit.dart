@@ -29,10 +29,11 @@ import 'package:projects/mobile/tasks/myTask.dart';
 import 'package:projects/model/session_model.dart';
 import 'package:projects/model/community_model.dart';
 import 'package:projects/model/tasks_model.dart';
+import 'package:projects/model/user_community_model.dart';
 import 'package:projects/shared/component/const.dart';
 import 'package:projects/shared/network/end_points.dart';
 import 'package:projects/shared/network/local/cash_helper.dart';
-
+import 'package:projects/model/hardware_model.dart';
 import '../../community/coach_profile.dart';
 import '../../community/welcome_screen.dart';
 import '../../notifications/notifications_screen.dart';
@@ -588,9 +589,9 @@ emit(GetCommunityInfoFailState(error: error.toString()));
 });
 }
 
-CommunityModel? userCommunity;
+  UserCommunityModel? userCommunity;
 Future getUserCommunityInfo({required var token, required BuildContext context,}) async {
-emit(AllTasksLoadingState());
+emit(GetCommunityInfoLoadingState());
 return await dio!
 .get(
   ("$COMMUNITY"),
@@ -601,7 +602,9 @@ options: Options(headers: {
 }),
 )
     .then((value) {
-  userCommunity=CommunityModel.fromJson(value.data);
+  userCommunity=UserCommunityModel.fromJson(value.data);
+  print(value.data);
+  print(userCommunity);
 
   print("----------------------------");
 emit(GetCommunityInfoSuccessState());
@@ -626,4 +629,34 @@ changeJoinButton({required int index}){
   isJoinClicked[index] =!isJoinClicked[index];
   emit(ChangeJoinButtonState());
 }
+
+AttributesUser? communityProfile;
+changeCommunityProdile({required AttributesUser profile}){
+  communityProfile=profile;
+  emit(ChangeCommunityProfileState());
+}
+  HardwareModel? hardwareModel;
+
+  Future getHardwareData({required var token, required BuildContext context,}) async {
+    emit(GetHardwareDataLoadingState());
+    return await dio!
+        .get(
+      ("$HARDWARE"),
+      options: Options(headers: {
+        "Accept": "application/vnd.api+json",
+        "Content-Type": "application/vnd.api+json",
+        "Authorization": "Bearer $token",
+      }),
+    )
+        .then((value) {
+      hardwareModel=HardwareModel.fromJson(value.data);
+      print(value.data);
+
+      print("----------------------------");
+      emit(GetHardwareDataSuccessState());
+    }).catchError((error) {
+      print(error.toString());
+      emit(GetHardwareDataFailState(error: error.toString()));
+    });
+  }
 }

@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:projects/mobile/community/cubit/cubit.dart';
-import 'package:projects/mobile/community/cubit/state.dart';
 import 'package:projects/mobile/home/app_cubit/cubit.dart';
 
 class Posts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return HomeCubit.get(context).userCommunity!.data.length==0?Center(child: CircularProgressIndicator(),):Padding(
       padding: EdgeInsets.symmetric(
         horizontal: 20,
       ),
@@ -36,6 +33,7 @@ class Posts extends StatelessWidget {
                             Expanded(
                               child: InkWell(
                                 onTap: () {
+                                  HomeCubit.get(context).changeCommunityProdile(profile: HomeCubit.get(context).userCommunity!.data[0].relationships.users[index].attributes);
                                   HomeCubit.get(context)
                                       .changeBody(index: 9);
                                 },
@@ -57,7 +55,7 @@ class Posts extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            "Mrs. Lilian O'Conner I",
+                                            HomeCubit.get(context).userCommunity!.data[0].relationships.users[index].attributes.name,
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .button!
@@ -116,7 +114,7 @@ class Posts extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "Rank in Community 6",
+                                  "Rank in Community "+HomeCubit.get(context).userCommunity!.data[0].relationships.users[index].attributes.points.toString(),
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 2,
                                   style: Theme.of(context)
@@ -207,7 +205,7 @@ class Posts extends StatelessWidget {
           separatorBuilder: (context, index) => SizedBox(
             height: 10,
           ),
-          itemCount: 10),
+          itemCount: HomeCubit.get(context).userCommunity!.data[0].relationships.users.length),
     );
   }
 }

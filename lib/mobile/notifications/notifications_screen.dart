@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projects/mobile/home/app_cubit/cubit.dart';
 import 'package:projects/mobile/home/app_cubit/state.dart';
+import 'package:projects/shared/network/local/cash_helper.dart';
 
 class NotificationsScreen extends StatelessWidget {
   const NotificationsScreen({Key? key}) : super(key: key);
@@ -9,11 +10,11 @@ class NotificationsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeCubit(),
+      create: (context) => HomeCubit()..getHardwareData(token: CashHelper.getString(key: "token"), context: context),
       child: BlocConsumer<HomeCubit, HomeStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          return SingleChildScrollView(
+          return state is GetHardwareDataLoadingState?Center(child: CircularProgressIndicator(),):SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,11 +27,14 @@ class NotificationsScreen extends StatelessWidget {
                       SizedBox(
                         height: 15,
                       ),
-                      Text(
-                        "Notifications",
-                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                              color: Colors.black,
-                            ),
+                      Container(
+                        width:double.infinity,
+                        child: Text(
+                          "Notifications",
+                          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                                color: Colors.black,
+                              ),
+                        ),
                       ),
                       SizedBox(
                         height: 30,
@@ -48,7 +52,7 @@ class NotificationsScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                ListView.separated(
+                HomeCubit.get(context).hardwareModel!.data.length==0?Container(child: Center(child: Text("No Notification",style:TextStyle(color:Colors.black))),):ListView.separated(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, index) => Container(
@@ -72,9 +76,11 @@ class NotificationsScreen extends StatelessWidget {
                                   ),
                                   Expanded(
                                     child: Text(
-                                      "rotation_x: 100.00  "
-                                    "rotation_y: 171.00  "
-                                      "rotation_z: 102.00  ",
+                                      "rotation_x: ${HomeCubit.get(context).hardwareModel!.data[HomeCubit.get(context).hardwareModel!.data.length-1].attributes.rotationX}  "
+                                    "rotation_y: ${HomeCubit.get(context).hardwareModel!.data[HomeCubit.get(context).hardwareModel!.data.length-1].attributes.rotationY}  "
+                                      "rotation_z: ${HomeCubit.get(context).hardwareModel!.data[HomeCubit.get(context).hardwareModel!.data.length-1].attributes.rotationZ}  "
+                                      "ultrasonic: ${HomeCubit.get(context).hardwareModel!.data[HomeCubit.get(context).hardwareModel!.data.length-1].attributes.ultrasonic}  "
+                                      ,
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 2,
                                       style: Theme.of(context)

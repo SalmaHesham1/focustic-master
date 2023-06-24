@@ -1,25 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projects/mobile/edit/edit_screen.dart';
+import 'package:projects/mobile/home/app_cubit/cubit.dart';
 import 'package:projects/mobile/profile/cubit/cubit.dart';
 import 'package:projects/mobile/profile/cubit/states.dart';
 
 class CommunityProfileScreen extends StatelessWidget {
+  var scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ProfileCubit(),
-      child: BlocConsumer<ProfileCubit, ProfileStates>(
-          listener: (context, state) {},
-          builder: (context, state) {
-            ProfileCubit.get(context).myProfileState(isMyProfile: false);
-            ProfileCubit.get(context).coachProfile(isCoach: false);
-            return buildProfileScreen(
-              context: context,
-              scaffoldKey: ProfileCubit.get(context).scaffoldKey,
-              myProfile: ProfileCubit.get(context).myProfile,
-            );
-          }),
+    return buildProfileScreen(
+      context: context,
+      scaffoldKey: scaffoldKey,
+      myProfile: false,
     );
   }
 }
@@ -116,38 +109,11 @@ Widget editName({
   required BuildContext context,
 }) {
   //edit icon
-  Widget editIcon() => ProfileCubit.get(context).animateEdit(
-        child: AnimatedContainer(
-          duration: Duration(milliseconds: 300),
-          child: Padding(
-            padding: const EdgeInsets.only(
-              bottom: 15,
-              left: 5,
-            ),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => EditScreen()));
-              },
-              child: Image(
-                height: ProfileCubit.get(context).isEditHover ? 20 : 15,
-                width: ProfileCubit.get(context).isEditHover ? 20 : 15,
-                fit: BoxFit.contain,
-                color: ProfileCubit.get(context).isEditHover
-                    ? Color(0xffFF5E17)
-                    : Colors.white,
-                image: AssetImage(
-                  "assets/icons/edit.png",
-                ),
-              ),
-            ),
-          ),
-        ),
-      );
+
   //person name
   personName() => Container(
         child: Text(
-          "Mrs. Lilian O'Conner I",
+          HomeCubit.get(context).communityProfile!.name,
           style: TextStyle(
             fontSize: 35,
             overflow: TextOverflow.ellipsis,
@@ -160,7 +126,7 @@ Widget editName({
       Row(
         children: [
           personName(),
-          ProfileCubit.get(context).myProfile ? editIcon() : SizedBox(),
+           SizedBox(),
         ],
       ),
       SizedBox(),
@@ -181,44 +147,6 @@ Widget sendAMessage({
         // mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // GestureDetector(
-          //   onTap: () {
-          //     Navigator.push(
-          //         context,
-          //         MaterialPageRoute(
-          //             builder: (context) => SendAMessageScreen()));
-          //   },
-          //   child: Row(
-          //     children: [
-          //       // Container(
-          //       //   width: 50,
-          //       //   height: 50,
-          //       //   decoration: BoxDecoration(
-          //       //       image: DecorationImage(
-          //       //     image: AssetImage("assets/icons/message.png"),
-          //       //   )),
-          //       //   child: Icon(
-          //       //     Icons.message,
-          //       //     color: Colors.black.withOpacity(0.3),
-          //       //     size: 25,
-          //       //   ),
-          //       // // ),
-          //       // SizedBox(
-          //       //   width: 3,
-          //       // ),
-          //       // Container(
-          //       //   child: Text(
-          //       //     "SEND A MESSAGE",
-          //       //     style: TextStyle(
-          //       //       color: Color(0xffFF5E17),
-          //       //       fontSize: 12,
-          //       //       overflow: TextOverflow.ellipsis,
-          //       //     ),
-          //       //   ),
-          //       // ),
-          //     ],
-          //   ),
-          // ),
           linkekdInAndGoogle(
             context: context,
           ),
@@ -247,28 +175,6 @@ Widget linkekdInAndGoogle({
               .titleLarge!
               .copyWith(color: Color(0xffF2C782)),
         )
-        // GestureDetector(
-        //   onTap: () {},
-        //   child: Image(
-        //     image: AssetImage("assets/icons/linkedin2.png"),
-        //   ),
-        // ),
-        // SizedBox(
-        //   width: 5,
-        // ),
-        // CircleAvatar(
-        //   backgroundColor: Color(0xffF2C783),
-        //   radius: 2,
-        // ),
-        // SizedBox(
-        //   width: 5,
-        // ),
-        // GestureDetector(
-        //   onTap: () {},
-        //   child: Image(
-        //     image: AssetImage("assets/icons/facebook.png"),
-        //   ),
-        // ),
       ],
     );
 
@@ -288,12 +194,29 @@ Widget editAndAgeAndSendAMessage({
           ),
           //work an age
           Container(
-            child: Text(
-              "major15@example.net - 8 YEARS OLD",
-              style: TextStyle(
-                  fontSize: 22,
-                  color: Theme.of(context).primaryColor,
-                  overflow: TextOverflow.ellipsis),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20,right: 10),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      "${HomeCubit.get(context).communityProfile!.email} ",
+                      style: TextStyle(
+                          fontSize: 22,
+                          color: Theme.of(context).primaryColor,
+                          overflow: TextOverflow.ellipsis),
+                    ),
+                  ),Expanded(
+                    child: Text(
+                      "- ${HomeCubit.get(context).communityProfile!.age} YEARS OLD",
+                      style: TextStyle(
+                          fontSize: 21,
+                          color: Theme.of(context).primaryColor,
+                          overflow: TextOverflow.ellipsis),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           //send a message
@@ -332,16 +255,11 @@ Widget buildProfileScreen({
             myProfile: myProfile,
           ),
           SizedBox(),
-          //body of the profile
-          // bodyOfTheProfile(
-          //   context: context,
-          //   profileCubit: ProfileCubit.get(context),
-          // ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Column(
-                mainAxisAlignment: ProfileCubit.get(context).myProfile
+                mainAxisAlignment: false
                     ? MainAxisAlignment.spaceBetween
                     : MainAxisAlignment.start,
                 children: [
@@ -367,7 +285,7 @@ Widget buildProfileScreen({
                       padding: EdgeInsets.all(15),
                       width: double.infinity,
                       child: Text(
-                        "Illum omnis laboriosam consectetur fuga cumque earum in.",
+                        HomeCubit.get(context).communityProfile!.bio.toString(),
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,

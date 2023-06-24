@@ -45,6 +45,7 @@ class HomeScreen extends StatelessWidget {
               body: Center(
                 child: CircularProgressIndicator(color: Color(0xffF98D47),),))
               : buildHomeScreen(
+            state:state,
             context: context,
             pageNum: HomeCubit
                 .get(context)
@@ -58,6 +59,7 @@ class HomeScreen extends StatelessWidget {
   Widget buildHomeScreen({
     required BuildContext context,
     required int pageNum,
+    required var state,
   }) =>
       Scaffold(
         floatingActionButton: pageNum == 16 || pageNum == 12 || pageNum == 19
@@ -80,7 +82,7 @@ class HomeScreen extends StatelessWidget {
               ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         backgroundColor: Colors.white,
-        appBar: pageNum == 19 ? null : appBar(context: context),
+        appBar: pageNum == 19 ? null : appBar(context: context,state:state),
         key: HomeCubit.get(context).scaffoldKey,
         endDrawer: drawer(
           context: context,
@@ -271,7 +273,7 @@ navBar({required BuildContext context}) => Stack(
     );
 
 //app bar
-appBar({required BuildContext context}) => AppBar(
+appBar({required BuildContext context,required var state,}) => AppBar(
       backgroundColor: HomeCubit.get(context).indexOfPage == 17
           ? Color(0xfff98e48)
           : HomeCubit.get(context).indexOfPage == 4 ||
@@ -340,6 +342,7 @@ appBar({required BuildContext context}) => AppBar(
                 padding: EdgeInsets.only(right: 15),
                 child: InkWell(
                   onTap: () {
+                    HomeCubit.get(context).getHardwareData(token: CashHelper.getString(key: "token"), context: context);
                     HomeCubit.get(context).changeBody(index: 14);
                   },
                   child: Image(
